@@ -1,0 +1,227 @@
+ok: 1 成功 2 错误 -2 重新登录
+
+---
+---------文章类别-------
+1.添加文章类别
+	地址 /articleType
+	请求方式 post
+	请求参数 
+	{
+		token
+		typeName
+	}
+	返回参数 
+	{
+		ok:1,
+		msg
+	}
+
+2.获取文章类别列表
+	地址 /articleType
+	请求方式 get
+	请求参数 
+	{
+		pageIndex
+	}
+	返回参数 
+	{
+		ok:1,
+		articleTypeList,
+		pageIndex,
+		pageSum
+	}
+
+3.删除文章类别
+	地址 /articleType
+	请求方式 delete
+	请求参数 
+	{
+		token
+		_id
+	}
+	返回参数 
+	{
+		ok:1,
+		msg
+	}
+
+4.修改文章类别
+	地址 /articleType
+	请求方式 put
+	请求参数 
+	{
+		token
+		_id
+		typeName
+	}
+	返回参数 
+	{
+		ok:1,
+		msg
+	}
+
+---
+
+---------文章-------
+1.添加文章
+	地址 /article
+	请求方式 post
+	请求参数 
+	{	
+		token
+		typeId
+		title
+		content
+	}
+	返回参数 
+	{
+		ok:1,
+		msg
+	}
+
+2.获取普通文章列表
+	地址 /article
+	请求方式 get
+	请求参数 
+	{	
+		typeId
+		pageIndex
+	}
+	返回参数 
+	{
+		ok:1,
+		articleList,
+		pageIndex,
+		pageSum
+	}
+
+
+3.获取私有文章列表
+	地址 /myArticle
+	请求方式 get
+	请求参数 
+	{
+		token
+		pageIndex
+	}
+	返回参数 
+	{
+		ok:1,
+		articleList,
+		pageIndex,
+		pageSum
+	}
+
+
+
+4.删除文章
+	地址 /article
+	请求方式 delete
+	请求参数 
+	{
+		token
+		_id
+	}
+	返回参数 
+	{
+		ok:1,
+		msg
+	}
+
+5.修改文章
+	地址 /article
+	请求方式 put
+	请求参数 
+	{
+		token
+		_id
+		content
+	}
+	返回参数 
+	{
+		ok:1,
+		msg
+	}
+
+---
+
+---------用户-------
+1.登录
+	地址 /user
+	请求方式 post
+	请求参数 
+	{
+		username
+		password
+	}
+	返回参数 
+	{
+		ok:1,
+		token
+	}
+
+---
+
+---------留言-------
+1.添加留言
+	地址 /message
+	请求方式 post
+	请求参数 
+	{
+		token
+		userIp
+		content
+	}
+	返回参数 
+	{
+		ok:1,
+		msg
+	}
+
+2.获取留言
+	地址 /message
+	请求方式 get
+	请求参数 
+	{
+		pageIndex
+	}
+	返回参数 
+	{
+		ok:1,
+		messageList,
+		pageIndex,
+		pageSum
+	}
+
+
+3.删除留言
+	地址 /message
+	请求方式 delete
+	请求参数 
+	{
+		token
+		_id
+	}
+	返回参数 
+	{
+		ok:1,
+		msg
+	}
+
+4.修改留言
+	地址 /message
+	请求方式 put
+	请求参数 
+	{
+		token
+		_id
+		content
+	}
+	返回参数 
+	{
+		ok:1,
+		msg
+	}
+
+---
+

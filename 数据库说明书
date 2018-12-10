@@ -1,0 +1,34 @@
+数据库： myApp
+
+文章 articleList
+	_id
+	typeId
+	title
+	content--articlePic 图片标识：#-Date.now()-#
+	createTime
+	isShow
+	isPrivate
+
+
+文章类别 articleTypeList
+	_id
+	typeName
+	isShow
+
+留言 messageList
+	_id
+	userIp
+	content
+	createTime
+
+操作日志  visitorLog
+	_id
+	ip
+	type 查看、留言
+	content
+	createTime
+
+用户 userList
+	_id
+	username
+	password
