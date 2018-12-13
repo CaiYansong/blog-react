@@ -67,12 +67,13 @@ ok: 1 成功 2 错误 -2 重新登录
 	地址 /article
 	请求方式 post
 	请求参数 
-	{	
-		token
-		typeId
-		title
-		content
-	}
+	token
+	formData
+		{	
+			typeId
+			title
+			content
+		}
 	返回参数 
 	{
 		ok:1,
@@ -160,6 +161,19 @@ ok: 1 成功 2 错误 -2 重新登录
 		token
 	}
 
+2.查看私有文章验证 私有密码
+	地址 /user
+	请求方式 post
+	请求参数 
+	{
+		token
+		privatePw
+	}
+	返回参数 
+	{
+		ok:1,
+		checkCode
+	}
 ---
 
 ---------留言-------
@@ -168,8 +182,6 @@ ok: 1 成功 2 错误 -2 重新登录
 	请求方式 post
 	请求参数 
 	{
-		token
-		userIp
 		content
 	}
 	返回参数 
@@ -213,8 +225,8 @@ ok: 1 成功 2 错误 -2 重新登录
 	请求方式 put
 	请求参数 
 	{
-		token
 		_id
+		userIp
 		content
 	}
 	返回参数 

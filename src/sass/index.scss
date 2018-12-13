@@ -1,0 +1,11 @@
+.index {
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+
+	.main {
+		width: 96vw;
+		margin: 0 auto;
+		flex: 1;
+	}
+}

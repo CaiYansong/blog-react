@@ -1,0 +1,88 @@
+.message {
+	margin: 0 auto;
+
+	.takeComment {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin: 20px 0;
+
+		.takeTextField {
+			width: 90vw;
+			height: 20vh;
+			max-height: 500px;
+			max-width: 800px;
+			resize: none;
+			border-bottom: 0;
+			outline: 0;
+			border-radius: 5px 5px 0 0;
+		}
+
+		.takeSbmComment {
+			width: 90vw;
+			max-width: 800px;
+			border-width: 0 1px 1px 1px;
+			border-style: solid;
+			border-color: #999;
+			background-color: #ffffff;
+			border-radius: 0 0 5px 5px;
+			overflow: hidden;
+			position: relative;
+			top: -1px;
+
+			input {
+				width: 14%;
+				margin: 0 5px 5px 0;
+				border: 0;
+				float: right;
+				background-color: #999999;
+				color: #ffffff;
+				outline: 0;
+				cursor: pointer;
+			}
+		}
+	}
+
+	.commentOn {
+		width: 90vw;
+		max-width: 800px;
+		margin: 10px auto;
+
+		.messList {
+			li {
+				text-align: left;
+				border: 1px solid #dddddd;
+				border-radius: 5px;
+				margin: 4px 0;
+				padding: 4px;
+
+				.createTime {
+					font-size: 10px;
+					color: #999999;
+				}
+			}
+		}
+
+		.page {
+			display: flex;
+			justify-content: flex-end;
+
+			span {
+				display: inline-block;
+				margin: 0 2px;
+				vertical-align: middle;
+			}
+
+			.target {
+				width: 30px;
+			}
+
+			.jump,
+			input {
+				vertical-align: middle;
+				margin: 0 2px;
+			}
+		}
+	}
+}

@@ -161,27 +161,28 @@ module.exports.count = function (coll, whereObj, cb) {
 /**
  *@method getArticleList
  *
- * @param {Object} $match
- * @param {Number} $skip
- * @param {Number} $limit
+ * @param {Object} match
+ * @param {Number} skip
+ * @param {Number} limit
  * @param {Function} cb 回掉函数(err,adminInfo)
  */
-module.exports.getArticleList = ($match, $skip, $limit, cb) => {
+module.exports.getArticleList = (match, skip, limit, cb) => {
     _connect(db => {
         db.collection('articleList').aggregate([{
                 $sort: {
                     addTime: -1
                 }
-            }, //时间倒序
+            }, //时间倒序//注意顺序 
             {
-                $match
-            }, //注意顺序
-            {
-                $skip
+                $match: match
             },
             {
-                $limit
-            }, {
+                $skip: skip
+            },
+            {
+                $limit: limit
+            },
+            {
                 $lookup: {
                     from: "articleTypeList", //要进行关联的集合
                     localField: "typeId", //关联集合在本集合的关键字段，类似于外键
@@ -189,49 +190,6 @@ module.exports.getArticleList = ($match, $skip, $limit, cb) => {
                     as: "typeInfo" //将合并的数据放到指定的字段当中
                 }
             }
-        ]);
+        ]).toArray(cb);//!!!!!注意这里需要使用toArray(cb)返回数据
     });
 };
-
-
-/**
- * @method 获取管理员日志 数据库多表联查
- * @param {number} skip
- * @param {number} limit
- * @param {Object} whereObj
- * @param {Function} cb 回掉函数(err,adminInfo)
- */
-module.exports.getAdminLogList = function ($skip, $limit, $match, cb) {
-    _connect((db) => {
-        db.collection('adminLog').aggregate([{
-                $sort: {
-                    addTime: -1
-                }
-            }, //时间倒序
-            {
-                $match
-            },
-            {
-                $skip
-            }, //注意顺序
-            {
-                $limit
-            },
-            {
-                $lookup: {
-                    from: "adminList", //要进行关联的集合
-                    localField: "adminId", //关联集合在本集合的关键字段，类似于外键
-                    foreignField: "_id", //外部集合的字段依据，关联集合的主键
-                    as: "adminInfo" //将合并的数据放到指定的字段当中
-                }
-            }, {
-                $lookup: {
-                    from: "logTypeList", //要进行关联的集合
-                    localField: "logType", //关联集合在本集合的关键字段，类似于外键
-                    foreignField: "typeNum", //外部集合的字段依据，关联集合的主键
-                    as: "logInfo" //将合并的数据放到指定的字段当中
-                }
-            }
-        ]).toArray(cb);
-    })
-}

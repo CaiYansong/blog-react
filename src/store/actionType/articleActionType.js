@@ -1,0 +1,4 @@
+export default {
+	GET_ARTICLE_TYPE: "GET_ARTICLE_TYPE",
+	GET_ARTICLE: "GET_ARTICLE"
+}
