@@ -11,11 +11,16 @@ module.exports.login = (req, res) => {
 		password: req.body.password
 	}, (err, item) => {
 		if (item) {
-			cookie.setCookie(res, common.encode(item));
-			res.send({
-				ok: 1,
-				msg: "登陆成功"
+			var token = common.encode(item)
+			res.writeHead(200, {
+				'Set-Cookie': 'token=' + token,
+				'Content-Type': 'text/plain'
 			});
+			res.end(JSON.stringify({
+				ok: 1,
+				msg: "登陆成功",
+				token
+			}));
 		} else {
 			common.end(res, 2, "账号或密码错误");
 		}

@@ -4,7 +4,15 @@ const cookie = require('../modules/cookie');
 
 
 module.exports.checkToken = function (req, res) {
-	var decoded = common.decode(cookie.getToken(req));
+	var token = cookie.getToken(req);
+	if (!token) {
+		res.send({
+			ok: 2,
+			msg: "不合法的操作"
+		});
+		return 0;
+	}
+	var decoded = common.decode(token);
 	if (decoded.exp < Date.now()) {
 		common.end(res, -2, '登录状态已过期，请重新登录');
 	} else {

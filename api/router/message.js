@@ -47,7 +47,7 @@ module.exports.get = (req, res) => {
 	var where = {};
 	db.count(messageColl, where, (err, count) => {
 		var pageIndex = (req.query.pageIndex || 1) / 1;
-		var pageNum = 10;
+		var pageNum = 5;
 		var pageSum = Math.ceil(count / pageNum);
 		if (pageIndex < 1) {
 			pageIndex = 1;

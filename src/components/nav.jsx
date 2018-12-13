@@ -8,7 +8,7 @@ class Nav extends React.Component {
 			<header>
 				<nav>
 					<NavLink activeStyle={{color:"#000",backgroundColor:"#f1f1f1"}} to="/" exact>首页</NavLink>
-					<NavLink activeStyle={{color:"#000",backgroundColor:"#f1f1f1"}} to="/article" exact>文章</NavLink>
+					<NavLink activeStyle={{color:"#000",backgroundColor:"#f1f1f1"}} to="/articleList" exact>文章</NavLink>
 					<NavLink activeStyle={{color:"#000",backgroundColor:"#f1f1f1"}} to="/message" exact>留言</NavLink>
 				</nav>
 			</header>

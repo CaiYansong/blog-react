@@ -59,11 +59,13 @@ export default {
 			axios.post("/article", formData).then(this.checkListBack);
 		}
 	},
-	getArticleList(pageIndex = 1) {
+	getArticleList(pageIndex = 1, typeId = "", keyword = "") {
 		return (dispatch, getState) => {
-			axios.get("/article", {
+			axios.get("/articleList", {
 				params: {
-					pageIndex
+					pageIndex,
+					keyword,
+					typeId
 				}
 			}).then(data => {
 				if (data.ok === 1)
@@ -78,11 +80,13 @@ export default {
 			});
 		}
 	},
-	getMyArticleList(pageIndex) {
+	getMyArticleList(pageIndex = 1, typeId = "", keyword = "") {
 		return (dispatch, getState) => {
-			axios.get("/myArticle", {
+			axios.get("/myArticleList", {
 				params: {
-					pageIndex
+					pageIndex,
+					keyword,
+					typeId
 				}
 			}).then(data => {
 				if (data.ok === 1)

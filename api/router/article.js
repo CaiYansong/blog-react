@@ -39,8 +39,8 @@ module.exports.post = (req, res) => {
 		}
 	});
 };
-//获取普通文章
-module.exports.get = (req, res) => {
+//获取普通文章列表
+module.exports.getList = (req, res) => {
 	var where = {
 		isShow: true,
 		isPrivate: false
@@ -48,11 +48,15 @@ module.exports.get = (req, res) => {
 	if (req.query.typeId) {
 		where.typeId = mongodb.ObjectId(req.query.typeId);
 	}
+	if (req.query.keyword) {
+		where.title = new RegExp(req.query.keyword);
+	}
+	console.log(where);
 	db.count(articleColl, where, (err, count) => {
 		if (err) {
 			common.end(res);
 		} else {
-			var pageNum = 2;
+			var pageNum = 5;
 			var pageIndex = (req.query.pageIndex || 1) / 1;
 			var pageSum = Math.ceil(count / pageNum);
 			if (pageSum < 1) {
@@ -83,8 +87,16 @@ module.exports.get = (req, res) => {
 		}
 	});
 };
-//获取私有文章
-module.exports.getMy = (req, res) => {
+//获取普通文章
+module.exports.get = (req, res) => {
+	db.getArticle(req.query._id, (err, item) => {
+		common.send(res, err, {
+			item: item[0]
+		});
+	});
+}
+//获取私有文章列表
+module.exports.getMyList = (req, res) => {
 	if (checkToken(req, res)) {
 		return 0;
 	}
@@ -95,11 +107,14 @@ module.exports.getMy = (req, res) => {
 	if (req.query.typeId) {
 		where.typeId = mongodb.ObjectId(req.query.typeId);
 	}
+	if (req.query.keyword) {
+		where.title = new RegExp(req.query.keyword);
+	}
 	db.count(articleColl, where, (err, count) => {
 		if (err) {
 			common.end(res);
 		} else {
-			var pageNum = 2;
+			var pageNum = 5;
 			var pageIndex = (req.query.pageIndex || 1) / 1;
 			var pageSum = Math.ceil(count / pageNum);
 			if (pageSum < 1) {
@@ -128,6 +143,17 @@ module.exports.getMy = (req, res) => {
 		}
 	});
 };
+//获取私有文章
+module.exports.getMy = (req, res) => {
+	if (checkToken(req, res)) {
+		return 0;
+	}
+	db.findById(articleColl, req.query._id, (err, item) => {
+		common.send(res, err, {
+			item
+		});
+	});
+}
 //删除文章
 module.exports.delete = (req, res) => {
 	if (checkToken(req, res)) {

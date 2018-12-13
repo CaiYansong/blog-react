@@ -1,27 +1,31 @@
 import React from 'react';
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
 
 import Nav from "./nav";
 import Home from "./home";
 import Article from "./article";
 import Message from "./message";
 import login from "./login";
+import AddArticle from "./article/addArticle";
+import articlePage from "./article/article";
 
 import "../sass/index.scss";
-
-class Index extends React.Component {
+export default withRouter(class Index extends React.Component {
 	render() {
-		return <div className="index" style={{ textAlign: "center" }}>
+		return <Router><div className="index" style={{ textAlign: "center" }}>
 			<Nav></Nav>
 			<div className="main">
 				<Switch>
 					<Route path="/" component={Home} exact></Route>
-					<Route path="/article" component={Article} ></Route>
+					<Route path="/articleList" component={Article} ></Route>
 					<Route path="/message" component={Message} ></Route>
 					<Route path="/login" component={login} ></Route>
+					<Route path="/addArticle/:type" component={AddArticle} ></Route>
+					<Route path="/articlePage/:id" component={articlePage} ></Route>
 				</Switch>
 			</div>
 		</div>
+		</Router>
 	}
-}
-export default Index;
+})
+

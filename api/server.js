@@ -17,7 +17,9 @@ app.put("/articleType", articleType.put);
 //===============================文章===============================
 app.post("/article", article.post);
 app.get("/article", article.get);
+app.get("/articleList", article.getList);
 app.get("/myArticle", article.getMy);
+app.get("/myArticleList", article.getMyList);
 app.delete("/article", article.delete);
 app.put("/article", article.put);
 //===============================留言===============================

@@ -190,6 +190,23 @@ module.exports.getArticleList = (match, skip, limit, cb) => {
                     as: "typeInfo" //将合并的数据放到指定的字段当中
                 }
             }
-        ]).toArray(cb);//!!!!!注意这里需要使用toArray(cb)返回数据
+        ]).toArray(cb); //!!!!!注意这里需要使用toArray(cb)返回数据
     });
 };
+
+module.exports.getArticle = (_id, cb) => {
+    _connect(db => {
+        db.collection('articleList').aggregate([{
+            $match: {
+                _id: mongodb.ObjectId(_id)
+            }
+        }, {
+            $lookup: {
+                from: "articleTypeList", //要进行关联的集合
+                localField: "typeId", //关联集合在本集合的关键字段，类似于外键
+                foreignField: "_id", //外部集合的字段依据，关联集合的主键
+                as: "typeInfo" //将合并的数据放到指定的字段当中
+            }
+        }]).toArray(cb); //!!!!!注意这里需要使用toArray(cb)返回数据
+    });
+}
