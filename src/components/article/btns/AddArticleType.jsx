@@ -1,5 +1,4 @@
 import React from 'react';
-import check from '../../checkToken';
 import axios from "axios";
 import { Modal, Form, Input } from 'antd';
 const FormItem = Form.Item;
@@ -15,7 +14,23 @@ class AddArticleType extends React.Component {
 		this.refs.add.addEventListener(this.props.clientType, this.showModal);
 	}
 	showModal = () => {
-		this.setState({ visible: true });
+		if (this.check()) {
+			this.setState({ visible: true });
+		} else {
+			alert("请先登录");
+		}
+	}
+	check = () => {
+		var token = "";
+		var arr = document.cookie.split('; ');
+		for (var i = 0; i < arr.length; i++) {
+			var key = arr[i].split("=")[0];
+			var value = arr[i].split("=")[1];
+			if (key === "token") {
+				token = value;
+			}
+		}
+		return token ? true : false;
 	}
 	handleCancel = () => {
 		this.setState({ visible: false });
@@ -61,7 +76,7 @@ class AddArticleType extends React.Component {
 	}
 }
 
-export default check(AddArticleType);
+export default AddArticleType;
 
 
 const CollectionCreateForm = Form.create()(

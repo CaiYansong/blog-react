@@ -9,14 +9,14 @@ import Page from "../page";
 
 class CommentOn extends React.Component {
 	deleteMessage = (_id) => {
-		axios.delete("/message", {
+		axios.delete("/messageItem", {
 			params: {
 				_id
 			}
 		}).then(this.checkBack.bind(this));
 	}
 	editMessage = (_id, content) => {
-		axios.put("/message", {
+		axios.put("/messageItem", {
 			_id,
 			content
 		}).then(this.checkBack.bind(this));

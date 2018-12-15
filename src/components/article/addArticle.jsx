@@ -26,7 +26,7 @@ class AddArticle extends React.Component {
 			alert("请选择类型");
 			return 0;
 		}
-		axios.post('/article', formData).then(data => {
+		axios.post('/articleItem', formData).then(data => {
 			if (data.ok === 1) {
 				this.props.getArticleList(1);
 				this.props.history.go(-1);

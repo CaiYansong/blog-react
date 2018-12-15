@@ -18,20 +18,20 @@ class Page extends React.Component {
 		this.handleChange();
 	}
 	handleChange = () => {
-		var prve = this.refs.prve;
+		var prev = this.refs.prev;
 		var next = this.refs.next;
 		var jump = this.refs.jump;
 		if ("ontouchstart" in window) {
-			prve.addEventListener("touchend", this.prve);
+			prev.addEventListener("touchend", this.prev);
 			next.addEventListener("touchend", this.next);
 			jump.addEventListener("touchend", this.jump);
 		} else {
-			prve.addEventListener("click", this.prve);
+			prev.addEventListener("click", this.prev);
 			next.addEventListener("click", this.next);
 			jump.addEventListener("click", this.jump);
 		}
 	}
-	prve = () => {
+	prev = () => {
 		var num = this.props.pageIndex;
 		if (this.props.pageIndex !== 1) {
 			this.props.change(--num, this.state.typeId, this.state.keyword);
@@ -64,7 +64,7 @@ class Page extends React.Component {
 	}
 	render() {
 		return <div className="page">
-			<span className="prve" ref="prve">上一页</span>
+			<span className="prev" ref="prev">上一页</span>
 			{this.props.pageIndex}/{this.props.pageSum}
 			<span className="next" ref="next">下一页</span>
 			<div className="jump"><input type="text" className="target" ref="page" /><span ref="jump">跳转</span></div>

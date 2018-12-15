@@ -56,7 +56,7 @@ export default {
 	//-----文章-----
 	addArticle(formData) {
 		return (dispatch, getState) => {
-			axios.post("/article", formData).then(this.checkListBack);
+			axios.post("/articleItem", formData).then(this.checkListBack);
 		}
 	},
 	getArticleList(pageIndex = 1, typeId = "", keyword = "") {
@@ -101,7 +101,7 @@ export default {
 	},
 	deleteArticle(_id) {
 		return (dispatch, getState) => {
-			axios.delete("/article", {
+			axios.delete("/articleItem", {
 				params: {
 					_id
 				}
@@ -110,7 +110,7 @@ export default {
 	},
 	editArticle(formData) {
 		return (dispatch, getState) => {
-			axios.put("/article", formData).then(this.checkListBack.bind(this));
+			axios.put("/articleItem", formData).then(this.checkListBack.bind(this));
 		}
 	}
 }

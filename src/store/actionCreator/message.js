@@ -5,7 +5,7 @@ import axios from "axios";
 export default {
 	getMessage(pageIndex = 1) {
 		return (dispatch, getState) => {
-			axios.get("/message", {
+			axios.get("/messageList", {
 				params: {
 					pageIndex
 				}

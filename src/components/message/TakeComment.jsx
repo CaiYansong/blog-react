@@ -18,7 +18,7 @@ class TakeComment extends React.Component {
 			alert("内容不能为空");
 			return 0;
 		}
-		axios.post("/message", {
+		axios.post("/messageItem", {
 			content: this.refs.content.value
 		}).then(data => {
 			if (data.ok === 1) {

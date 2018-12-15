@@ -10,7 +10,7 @@ class Article extends React.Component {
 		}
 	}
 	getItem = (_id) => {
-		axios.get('/article', { params: { _id } }).then(data => {
+		axios.get('/articleItem', { params: { _id } }).then(data => {
 			if (data.ok === 1) {
 				this.setState({ item: data.item });
 			} else {
@@ -30,7 +30,7 @@ class Article extends React.Component {
 		this.refs.remove.addEventListener(event, this.handleRemove);
 	}
 	confirm = (e) => {
-		axios.delete('/article', { params: { _id: this.props.match.params.id } }).then(data => {
+		axios.delete('/articleItem', { params: { _id: this.props.match.params.id } }).then(data => {
 			if (data.ok === 1) {
 				this.props.history.push('/articleList');
 				message.success('删除成功');

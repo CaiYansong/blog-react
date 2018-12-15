@@ -76,6 +76,7 @@ class Article extends React.Component {
 				></Page> : "没有文章"}
 			</ul>
 			<div className={this.props.clientType === "click" ? "option" : "phoneOption"} ref="option">
+				{this.checkToken() ? "" : <span onClick={() => { this.props.history.push('/login') }}>登录</span>}
 				<AddArticle history={this.props.history} clientType={this.props.clientType}></AddArticle>
 				<div className="search">
 					<Input placeholder="搜索" onBlur={this.search} onChange={this.changeKeyword} ref="search" />
