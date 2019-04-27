@@ -30,7 +30,7 @@ class CommentOn extends React.Component {
 	}
 	getDateTime(time) {
 		var m = moment(time)
-		return m.year() + "年" + m.month() + "月" + m.date() + "日 " + m.hour() + ":" + m.minute() + ":" + m.second()
+		return m.year() + "年" + (m.month() + 1) + "月" + m.date() + "日 " + m.hour() + ":" + m.minute() + ":" + m.second();
 	}
 	componentWillMount(){
 		this.props.getMessage(1);

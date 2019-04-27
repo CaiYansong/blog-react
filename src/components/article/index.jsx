@@ -47,7 +47,7 @@ class Article extends React.Component {
 	}
 	checkToken() {
 		var token = "";
-		var arr = document.cookie.split(';');
+		var arr = document.cookie.split('; ');
 		for (var i = 0; i < arr.length; i++) {
 			var key = arr[i].split("=")[0];
 			var value = arr[i].split("=")[1];
@@ -64,7 +64,7 @@ class Article extends React.Component {
 					return <li key={v._id} data-id={v._id} onClick={() => { this.props.history.push("/articlePage/" + v._id); }}>
 						<h3 className="title">{v.title}【{v.typeInfo[0].typeName}】</h3>
 						<p className="time">{v.createTime}</p>
-						<p className="content">{v.content}</p>
+						<div style={{maxHeight: '63px'}} className="content" dangerouslySetInnerHTML={{__html: v.content}} />
 					</li>
 				})}
 				{this.props.articleList.length !== 0 ? <Page

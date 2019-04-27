@@ -5,7 +5,16 @@ import { bindActionCreators } from "redux";
 import actionCreators from '../../store/actionCreator';
 import "../../sass/addArticle.scss";
 
+import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+
 class AddArticle extends React.Component {
+	state = {
+		editorState: EditorState.createEmpty()
+	}
 	handleEvent = () => {
 		var event = this.props.match.params.type;
 		this.refs.cancel.addEventListener(event, () => { this.props.history.go(-1) });
@@ -18,10 +27,10 @@ class AddArticle extends React.Component {
 			alert("请输入标题");
 			return 0;
 		}
-		if (!formData.get("content")) {
-			alert("请输入内容");
-			return 0;
-		}
+		var editorContent = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()));
+
+		formData.append("content", editorContent);
+
 		if (!formData.get("typeId")) {
 			alert("请选择类型");
 			return 0;
@@ -41,24 +50,34 @@ class AddArticle extends React.Component {
 			this.props.getArticleType();
 		}
 	}
+
+	onEditorStateChange = (editorState) => {
+		this.setState({editorState});
+	}
+
 	render() {
 		var typeList = this.props.articleTypeList;
 		return <form action="" ref="form" className="addArticle">
-			<h3>添加文章</h3>
-			<input type="text" placeholder="文章标题" name="title" autoFocus/>
-			<textarea placeholder="内容" name="content" ></textarea>
-			<div className="choice">
-				<select name="typeId">
-					{typeList.map(v => <option key={v._id} value={v._id}>{v.typeName}</option>)}
-				</select>
-				<div>
-					<span>隐私文章 ：</span>
-					<input type="radio" name="isPrivate" id="isPrivate" value="true" />
-					<label htmlFor="isPrivate">是</label>
-					<input type="radio" name="isPrivate" id="noPrivate" value="false" defaultChecked />
-					<label htmlFor="noPrivate" >否</label>
+				<h3>添加文章</h3>
+				<input type="text" placeholder="文章标题" name="title" autoFocus/>
+				<Editor
+					editorState={this.state.editorState}
+					wrapperClassName="demo-wrapper"
+					editorClassName="demo-editor"
+					onEditorStateChange={this.onEditorStateChange}
+				/>
+				<div className="choice">
+					<select name="typeId">
+						{typeList.map(v => <option key={v._id} value={v._id}>{v.typeName}</option>)}
+					</select>
+					<div>
+						<span>隐私文章 ：</span>
+						<input type="radio" name="isPrivate" id="isPrivate" value="true" />
+						<label htmlFor="isPrivate">是</label>
+						<input type="radio" name="isPrivate" id="noPrivate" value="false" defaultChecked />
+						<label htmlFor="noPrivate" >否</label>
+					</div>
 				</div>
-			</div>
 			<div>
 				<span className="btn" ref="cancel">取消</span>
 				<span className="btn" ref="commit">添加</span>

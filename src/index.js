@@ -12,11 +12,11 @@ import {
 import {BrowserRouter as Router} from "react-router-dom";
 
 
-axios.interceptors.request.use(config => {
-	config.url=":8080"+config.url;
-	console.log(config);
-	return config;
-});
+// axios.interceptors.request.use(config => {
+// 	config.url=":8080"+config.url;
+// 	console.log(config);
+// 	return config;
+// });
 
 axios.interceptors.response.use(({
 	data
