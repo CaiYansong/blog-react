@@ -9,7 +9,7 @@ const messageColl = "messageList";
 //添加留言
 module.exports.post = (req, res) => {
 	var userIp = common.getClientIP(req);
-	console.log(userIp);
+	console.log(userIp,common.getNowTime());
 	var min = new Date(common.getNowDate()).getTime();
 	var max = min + 24 * 60 * 60 * 1000;
 	if (!req.body.content) {

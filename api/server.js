@@ -33,7 +33,7 @@ app.post('/visitorLog', user.visitorLog);
 //===============================登录===============================
 app.post('/login', user.login);
 
-app.listen(8080, err => {
+app.listen(80, err => {
 	if (err) {
 		console.log(err);
 	} else {

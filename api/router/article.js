@@ -51,7 +51,6 @@ module.exports.getList = (req, res) => {
 	if (req.query.keyword) {
 		where.title = new RegExp(req.query.keyword);
 	}
-	console.log(where);
 	db.count(articleColl, where, (err, count) => {
 		if (err) {
 			common.end(res);
@@ -164,19 +163,10 @@ module.exports.delete = (req, res) => {
 		if (err) {
 			common.end(res);
 		} else {
-			console.log(typeof item)
 			if (item) {
-				if (item.isShow) {
-					db.updateOne(articleColl, _id, {
-						$set: {
-							isShow: false
-						}
-					}, err => {
-						common.send(res, err, "删除成功");
-					})
-				} else {
-					common.end(res, 1, '文章不存在1');
-				}
+				db.deleteOne(articleColl, _id, err => {
+					common.send(res, err, "删除成功");
+				});
 			} else {
 				common.end(res, 1, '文章不存在2');
 			}

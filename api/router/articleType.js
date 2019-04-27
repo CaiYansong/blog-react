@@ -53,7 +53,7 @@ module.exports.delete = (req, res) => {
 		}
 		if (item) { //若不存在该类别
 			db.find(articleColl, {
-				typeId: mongodb.ObjectId(_id)
+				whereObj:{typeId: mongodb.ObjectId(_id)}
 			}, (err, list) => {
 				if (err) {
 					common.end(res);
@@ -65,25 +65,6 @@ module.exports.delete = (req, res) => {
 					});
 				} else {
 					common.end(res, 2, "请先将对应的类别文章全部删除，才可以删除该类别");
-					db.updateMany(articleColl, {
-						typeId: mongodb.ObjectId(_id)
-					}, {
-						$set: {
-							isShow: false
-						}
-					}, err => {
-						if (err) {
-							common.end(err);
-							return 0;
-						}
-						db.updateOne(articleTypeColl, _id, {
-							$set: {
-								isShow: false
-							}
-						}, err => {
-							common.send(res, err, "删除成功");
-						});
-					});
 				}
 			});
 		} else {
