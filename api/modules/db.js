@@ -168,14 +168,14 @@ module.exports.count = function (coll, whereObj, cb) {
  */
 module.exports.getArticleList = (match, skip, limit, cb) => {
     _connect(db => {
-        db.collection('articleList').aggregate([{
-                $sort: {
-                    addTime: -1
-                }
-            }, //时间倒序//注意顺序 
+        db.collection('articleList').aggregate([
             {
                 $match: match
-            },
+            },{
+                $sort: {
+                    createTime: -1
+                }
+            }, //时间倒序//注意顺序 
             {
                 $skip: skip
             },
