@@ -11,8 +11,13 @@
 		margin: 10px 0;
 	}
 
-	.rdw-editor-wrapper{
+	.demo-wrapper{
 		background: #fff;
+		border: 1px solid #ddd;
+	}
+
+	.demo-editor{
+		min-height: 300px;
 	}
 
 	textarea {
