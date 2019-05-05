@@ -7,9 +7,9 @@ class Nav extends React.Component {
 		return <div className="header">
 			<header>
 				<nav>
-					<NavLink activeStyle={{color:"#000",backgroundColor:"#f1f1f1"}} to="/" exact>首页</NavLink>
-					<NavLink activeStyle={{color:"#000",backgroundColor:"#f1f1f1"}} to="/articleList" exact>文章</NavLink>
-					<NavLink activeStyle={{color:"#000",backgroundColor:"#f1f1f1"}} to="/message" exact>留言</NavLink>
+					<NavLink activeStyle={{color:"#000",backgroundColor:"#fff"}} to="/" exact>首页</NavLink>
+					<NavLink activeStyle={{color:"#000",backgroundColor:"#fff"}} to="/articleList" exact>文章</NavLink>
+					<NavLink activeStyle={{color:"#000",backgroundColor:"#fff"}} to="/message" exact>留言</NavLink>
 				</nav>
 			</header>
 		</div>

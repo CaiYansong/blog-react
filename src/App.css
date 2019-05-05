@@ -24,11 +24,11 @@ select {
 
 html {
   font: 3vw '微软雅黑', 'Arial Narrow', HELVETICA;
-  background: #f1f1f1;
+  /* background: #f1f1f1; */
 }
 
 body {
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
 }
 
 a,
@@ -41,7 +41,7 @@ span {
 }
 
 li {
-  list-style: none
+  /* list-style: none */
 }
 
 img {
