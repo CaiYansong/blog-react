@@ -30,9 +30,16 @@ class CommentOn extends React.Component {
 	}
 	getDateTime(time) {
 		var m = moment(time)
-		return m.year() + "年" + (m.month() + 1) + "月" + m.date() + "日 " + m.hour() + ":" + m.minute() + ":" + m.second();
+		return m.year() + "年" + (m.month() + 1) + "月" + m.date() + "日 " + this.formattingTime(m.hour()) + ":" + this.formattingTime(m.minute()) + ":" + this.formattingTime(m.second());
 	}
-	componentWillMount(){
+	/**
+	 * 格式化时间
+	 * 格式化为两位数
+	 */
+	formattingTime(time) {
+		return time > 9 ? time : '0' + time;
+	}
+	componentWillMount() {
 		this.props.getMessage(1);
 	}
 	render() {

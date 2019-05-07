@@ -7,6 +7,7 @@
 
 	.article-list {
 		flex: 4;
+		max-width: 80%;
 
 		li {
 			list-style: none;
@@ -29,7 +30,6 @@
 			}
 
 			.content {
-				width: 90%;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
@@ -41,6 +41,7 @@
 
 	.option {
 		flex: 1;
+		min-width: 200px;
 		background-color: #f1f1f1;
 		box-sizing: border-box;
 		padding: 2vw;
@@ -113,5 +114,14 @@
 
 	.content {
 		text-align: left;
+
+		ol,
+		ul {
+
+			ol,
+			ul {
+				margin-left: 2em;
+			}
+		}
 	}
 }

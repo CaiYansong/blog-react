@@ -9,7 +9,7 @@ import store from "./store";
 import {
 	Provider
 } from "react-redux";
-import {BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 
 // axios.interceptors.request.use(config => {
@@ -24,7 +24,7 @@ axios.interceptors.response.use(({
 	return data;
 });
 
-ReactDOM.render( <Provider store={store}><Router>< App /></Router></Provider> , document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><Router>< App /></Router></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

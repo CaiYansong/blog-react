@@ -10,7 +10,7 @@ module.exports.checkToken = function (req, res) {
 			ok: 2,
 			msg: "不合法的操作"
 		});
-		return 0;
+		return true;
 	}
 	var decoded = common.decode(token);
 	if (decoded.exp < Date.now()) {

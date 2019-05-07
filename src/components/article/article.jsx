@@ -43,14 +43,26 @@ class Article extends React.Component {
 	cancel(e) {
 		message.error('取消删除');
 	}
+	checkToken() {
+		var token = "";
+		var arr = document.cookie.split('; ');
+		for (var i = 0; i < arr.length; i++) {
+			var key = arr[i].split("=")[0];
+			var value = arr[i].split("=")[1];
+			if (key === "token") {
+				token = value;
+			}
+		}
+		return token ? true : false;
+	}
 	render() {
 		var item = this.state.item;
 		return <div className="articleRead">
 			<h2 className="title">{item.title}【{item.typeInfo ? item.typeInfo[0].typeName : ""}】</h2>
 			<p className="time">{item.createTime}</p>
-			<div className="content" dangerouslySetInnerHTML={{__html: item.content}} />
+			<div className="content" dangerouslySetInnerHTML={{ __html: item.content }} />
 			<Popconfirm title="是否确定删除" onConfirm={this.confirm} onCancel={this.cancel} okText="删除" cancelText="取消">
-				<div className="remove" ref="remove">删除</div>
+				<div className="remove" ref="remove" style={this.checkToken()? '' : {display: 'none'}}>删除</div>
 			</Popconfirm>
 		</div>
 	}

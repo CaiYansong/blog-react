@@ -57,6 +57,16 @@ class Article extends React.Component {
 		}
 		return token ? true : false;
 	}
+	/**
+	 * 减少列表渲染的内容长度
+	 */
+	subArticleContent(str) {
+		if (str.length > 120) {
+			return str.substr(0, 120) + '...';
+		} else {
+			return str;
+		}
+	}
 	render() {
 		return <div className="article">
 			<ul className="article-list">
@@ -64,7 +74,7 @@ class Article extends React.Component {
 					return <li key={v._id} data-id={v._id} onClick={() => { this.props.history.push("/articlePage/" + v._id); }}>
 						<h3 className="title">{v.title}【{v.typeInfo[0].typeName}】</h3>
 						<p className="time">{v.createTime}</p>
-						<div style={{maxHeight: '63px'}} className="content" dangerouslySetInnerHTML={{__html: v.content}} />
+						<div style={{ maxHeight: '63px' }} className="content" dangerouslySetInnerHTML={{ __html: this.subArticleContent(v.content) }} />
 					</li>
 				})}
 				{this.props.articleList.length !== 0 ? <Page
