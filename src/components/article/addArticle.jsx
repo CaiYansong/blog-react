@@ -49,6 +49,18 @@ class AddArticle extends React.Component {
 		if (this.props.articleTypeList.length === 0) {
 			this.props.getArticleType();
 		}
+
+		// tab按键不会切换到下面
+		document.querySelector('.demo-editor').addEventListener('keydown', function (event) {
+			var e = event || window.event;
+			if (e && e.keyCode == 9) { // 按 tab 
+				if (e.preventDefault) {
+					e.preventDefault();
+				  } else {
+					e.returnValue = false;
+				  }
+			}
+		});
 	}
 
 	onEditorStateChange = (editorState) => {
