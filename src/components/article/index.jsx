@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import actionCreators from '../../store/actionCreator';
 import AddArticle from "./btns/addArticle";
 import AddArticleType from "./btns/AddArticleType";
-import Page from "../page";
+import Page from "../pagnation";
 
 import "../../sass/article.scss";
 
@@ -71,7 +71,7 @@ class Article extends React.Component {
 		return <div className="article">
 			<ul className="article-list">
 				{this.props.articleList.map(v => {
-					return <li key={v._id} data-id={v._id} onClick={() => { this.props.history.push("/articlePage/" + v._id); }}>
+					return <li className="article-item" key={v._id} data-id={v._id} onClick={() => { this.props.history.push("/articlePage/" + v._id); }}>
 						<h3 className="title">{v.title}【{v.typeInfo[0].typeName}】</h3>
 						<p className="time">{v.createTime}</p>
 						<div style={{ maxHeight: '63px' }} className="content" dangerouslySetInnerHTML={{ __html: this.subArticleContent(v.content) }} />
@@ -86,7 +86,6 @@ class Article extends React.Component {
 				></Page> : "没有文章"}
 			</ul>
 			<div className={this.props.clientType === "click" ? "option" : "phoneOption"} ref="option">
-				{this.checkToken() ? "" : <span onClick={() => { this.props.history.push('/login') }}>登录</span>}
 				<AddArticle history={this.props.history} clientType={this.props.clientType}></AddArticle>
 				<div className="search">
 					<Input placeholder="搜索" onBlur={this.search} onChange={this.changeKeyword} ref="search" />
@@ -97,8 +96,8 @@ class Article extends React.Component {
 					<div onClick={() => { this.choiceType("") }} style={{ textAlign: "center" }}>全部</div>
 					{this.props.articleTypeList.map(v => {
 						return <div key={v._id}>
-							<p className="typeItem">
-								<span onClick={() => { this.choiceType(v._id) }}>{v.typeName}</span>
+							<p className="type-item">
+								<span onClick={() => { this.choiceType(v._id) }} className="type-name">{v.typeName}</span>
 								{this.checkToken() ? <span onClick={() => { console.log(this.props.deleteArticleType(v._id)) }}>删除</span> : ""}
 							</p>
 						</div>

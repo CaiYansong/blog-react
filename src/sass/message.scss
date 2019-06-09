@@ -64,27 +64,5 @@
 				}
 			}
 		}
-
-		.page {
-			display: flex;
-			justify-content: flex-end;
-
-			span {
-				display: inline-block;
-				margin: 0 2px;
-				vertical-align: middle;
-				cursor: pointer;
-			}
-
-			.target {
-				width: 30px;
-			}
-
-			.jump,
-			input {
-				vertical-align: middle;
-				margin: 0 2px;
-			}
-		}
 	}
 }

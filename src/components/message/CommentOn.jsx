@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import actionCreators from "../../store/actionCreator";
 import axios from "axios";
 import moment from "moment";
-import Page from "../page";
+import Page from "../pagnation";
 
 
 class CommentOn extends React.Component {

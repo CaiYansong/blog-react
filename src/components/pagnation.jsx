@@ -63,7 +63,7 @@ class Page extends React.Component {
 		}
 	}
 	render() {
-		return <div className="page">
+		return <div className="pagnation">
 			<span className="prev" ref="prev">上一页</span>
 			{this.props.pageIndex}/{this.props.pageSum}
 			<span className="next" ref="next">下一页</span>

@@ -1,11 +1,44 @@
+@import './media.scss';
+
 .index {
+	width: 100vw;
+	height: 100vh;
 	text-align: left;
 	display: flex;
-	flex-direction: column;
 
 	.main {
-		width: 96vw;
-		margin: 0 auto;
 		flex: 1;
+		padding: 20px;
+		display: flex;
+
+		.home,
+		.article-list,
+		.login-form {
+			margin: 0 auto;
+		}
+
+	}
+	
+	.pagnation {
+		display: flex;
+		justify-content: flex-end;
+		margin: 10px 0 0 0;
+
+		span {
+			display: inline-block;
+			margin: 0 4px;
+			vertical-align: middle;
+			cursor: pointer;
+		}
+
+		.target {
+			width: 30px;
+		}
+
+		.jump,
+		input {
+			vertical-align: middle;
+			margin: 0 2px;
+		}
 	}
 }
