@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actionCreators from "../../store/actionCreator";
 import axios from "axios";
-import moment from "moment";
 import Page from "../pagnation";
 
 
@@ -29,8 +28,8 @@ class CommentOn extends React.Component {
 		}
 	}
 	getDateTime(time) {
-		var m = moment(time)
-		return m.year() + "年" + (m.month() + 1) + "月" + m.date() + "日 " + this.formattingTime(m.hour()) + ":" + this.formattingTime(m.minute()) + ":" + this.formattingTime(m.second());
+		var m = new Date(time);
+		return m.getFullYear() + "年" + (m.getMonth() + 1) + "月" + m.getDate() + "日 " + this.formattingTime(m.getHours()) + ":" + this.formattingTime(m.getMinutes()) + ":" + this.formattingTime(m.getSeconds());
 	}
 	/**
 	 * 格式化时间

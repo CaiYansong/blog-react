@@ -5,7 +5,7 @@ import '../sass/nav.scss';
 class Nav extends React.Component {
 	render() {
 		return <div className="header">
-			<NavLink className="logo-box" to="/" exact><img className="logo" src="assets/dog.png" alt="logo" title="logo" /></NavLink>
+			<NavLink className="logo-box" to="/" exact><img className="logo" src="assets/dog_128px.png" alt="logo" title="logo" /></NavLink>
 			<nav>
 				<NavLink activeStyle={{ color: "#222", backgroundColor: "#fff" }} to="/" exact>首页</NavLink>
 				<NavLink activeStyle={{ color: "#222", backgroundColor: "#fff" }} to="/articleList" exact>文章</NavLink>
