@@ -15,11 +15,25 @@ class AddArticle extends React.Component {
 	state = {
 		editorState: EditorState.createEmpty()
 	}
-	handleEvent = () => {
-		var event = this.props.match.params.type;
-		this.refs.cancel.addEventListener(event, () => { this.props.history.go(-1) });
-		this.refs.commit.addEventListener(event, this.commit);
+
+	componentDidMount() {
+		if (this.props.articleTypeList.length === 0) {
+			this.props.getArticleType();
+		}
+
+		// tab按键不会切换到下面
+		document.querySelector('.demo-editor').addEventListener('keydown', function (event) {
+			var e = event || window.event;
+			if (e && e.keyCode === 9) { // 按 tab 
+				if (e.preventDefault) {
+					e.preventDefault();
+				} else {
+					e.returnValue = false;
+				}
+			}
+		});
 	}
+
 	commit = () => {
 		var form = this.refs.form;
 		var formData = new FormData(form);
@@ -44,24 +58,6 @@ class AddArticle extends React.Component {
 			}
 		});
 	}
-	componentDidMount() {
-		this.handleEvent();
-		if (this.props.articleTypeList.length === 0) {
-			this.props.getArticleType();
-		}
-
-		// tab按键不会切换到下面
-		document.querySelector('.demo-editor').addEventListener('keydown', function (event) {
-			var e = event || window.event;
-			if (e && e.keyCode == 9) { // 按 tab 
-				if (e.preventDefault) {
-					e.preventDefault();
-				} else {
-					e.returnValue = false;
-				}
-			}
-		});
-	}
 
 	onEditorStateChange = (editorState) => {
 		this.setState({ editorState });
@@ -82,17 +78,10 @@ class AddArticle extends React.Component {
 				<select name="typeId">
 					{typeList.map(v => <option key={v._id} value={v._id}>{v.typeName}</option>)}
 				</select>
-				<div>
-					<span>隐私文章 ：</span>
-					<input type="radio" name="isPrivate" id="isPrivate" value="true" />
-					<label htmlFor="isPrivate">是</label>
-					<input type="radio" name="isPrivate" id="noPrivate" value="false" defaultChecked />
-					<label htmlFor="noPrivate" >否</label>
-				</div>
 			</div>
 			<div>
-				<span className="btn" ref="cancel">取消</span>
-				<span className="btn" ref="commit">添加</span>
+				<span className="btn" ref="cancel" onClick={() => { this.props.history.go(-1) }}>取消</span>
+				<span className="btn" ref="commit" onClick={this.commit}>添加</span>
 			</div>
 		</form>
 	}

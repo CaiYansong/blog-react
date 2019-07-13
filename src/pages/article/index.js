@@ -1,50 +1,42 @@
 import React from 'react';
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Pagination } from "antd";
-import actionCreators from '../../store/actionCreator';
-
-import ArticleList from '../../components/article-list';
-
-import "./index.scss";
+import axios from "axios";
+import { Popconfirm, message } from 'antd';
 
 class Article extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			keyword: ""
-		}
+	state = {
+		item: {}
 	}
 
 	componentDidMount() {
-		this.props.getArticleList(1);
+		this.getItem(this.props.match.params.id);
 	}
 
-	changeKeyword = (e) => {
-		var keyword = e.target.value;
-		this.setState({ keyword });
+	getItem = (_id) => {
+		axios.get('/articleItem', { params: { _id } }).then(data => {
+			if (data.ok === 1) {
+				this.setState({ item: data.item });
+			} else {
+				alert(data.msg);
+			}
+		});
 	}
 
-	search = () => {
-		const { getArticleList, typeId } = this.props;
-		getArticleList(1, typeId, this.state.keyword);
+	confirm = (e) => {
+		axios.delete('/articleItem', { params: { _id: this.props.match.params.id } }).then(data => {
+			if (data.ok === 1) {
+				this.props.history.push('/articleList');
+				message.success('删除成功');
+			} else {
+				message.error("删除失败");
+			}
+		});
 	}
 
-	onChange = (index) => {
-		const { getArticleList, typeId } = this.props;
-		getArticleList(index, typeId);
+	cancel(e) {
+		message.error('取消删除');
 	}
 
-	add = () => {
-		if (this.check()) {
-			const { typeId } = this.props;
-			this.props.history.push('/addArticle/' + typeId);
-		} else {
-			alert("请先登录");
-		}
-	}
-
-	check = () => {
+	checkToken() {
 		var token = "";
 		var arr = document.cookie.split('; ');
 		for (var i = 0; i < arr.length; i++) {
@@ -58,38 +50,15 @@ class Article extends React.Component {
 	}
 
 	render() {
-		const { articleList, pageIndex, total, history } = this.props;
-
-		return <div className="article">
-			<div className="article-option">
-				<span onClick={this.add}>添加文章</span>
-				<input type="text" />
-				<button >搜索</button>
-			</div>
-			<ArticleList
-				articleList={articleList}
-				history={history}
-			/>
-			{articleList.length !== 0 ?
-				<Pagination
-					showQuickJumper
-					current={pageIndex}
-					pageSize={5}
-					total={total}
-					onChange={this.onChange}
-				/>
-				: "没有文章"}
-		</div >
+		var item = this.state.item;
+		return <div className="articleRead">
+			<h2 className="title">{item.title}</h2>
+			<p className="time">{item.createTime}【{item.typeInfo ? item.typeInfo[0].typeName : ""}】</p>
+			<div className="content" dangerouslySetInnerHTML={{ __html: item.content }} />
+			<Popconfirm title="是否确定删除" onConfirm={this.confirm} onCancel={this.cancel} okText="删除" cancelText="取消" style={this.checkToken() ? '' : { display: 'none' }}>
+				<div className="remove" ref="remove">删除</div>
+			</Popconfirm>
+		</div>
 	}
 }
-
-function mapSTP(state) {
-	return {
-		articleList: state.article.articleList,
-		articleTypeList: state.article.articleTypeList,
-		pageIndex: state.article.pageIndex,
-		total: state.article.total,
-		clientType: state.index.clientType
-	};
-}
-export default connect(mapSTP, dispatch => bindActionCreators(actionCreators, dispatch))(Article);
+export default Article;

@@ -13,7 +13,6 @@ export default function (state = initState, action) {
 			newState.total = action.payload.total;
 			break;
 		case article.CHANGE_TYPE:
-			console.log(newState, action);
 			newState.typeId = action.typeId;
 			break;
 		default:

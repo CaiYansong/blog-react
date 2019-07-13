@@ -17,9 +17,6 @@ export default {
 	},
 	getArticleList(pageIndex = 1, typeId = "", keyword = "") {
 		return (dispatch, getState) => {
-			if (getState()) {
-				console.log(getState().article);
-			}
 			axios.get("/articleList", {
 				params: {
 					pageIndex,

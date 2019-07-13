@@ -6,7 +6,7 @@ import Nav from '../components/nav';
 
 import Home from './home';
 import AddArticle from './add-article';
-import ArticleList from './article';
+import ArticleList from './article-list';
 import Article from './article';
 import Message from './message';
 import Login from './login';
@@ -27,7 +27,7 @@ export default withRouter(class Index extends React.Component {
 							<Route path="/articleList" component={ArticleList} ></Route>
 							<Route path="/message" component={Message} ></Route>
 							<Route path="/login" component={Login} ></Route>
-							<Route path="/addArticle/:typeId" component={AddArticle} ></Route>
+							<Route path="/addArticle" component={AddArticle} ></Route>
 							<Route path="/articlePage/:id" component={Article} ></Route>
 						</Switch>
 					</Content>
