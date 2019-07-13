@@ -15,7 +15,8 @@ export default {
 						type: type.GET_MESSAGE,
 						messageList: data.messageList,
 						pageIndex: data.pageIndex,
-						pageSum: data.pageSum
+						pageSum: data.pageSum,
+						total: data.count
 					});
 			});
 		}

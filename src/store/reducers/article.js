@@ -10,6 +10,11 @@ export default function (state = initState, action) {
 			newState.articleList = action.payload.articleList;
 			newState.pageIndex = action.payload.pageIndex;
 			newState.pageSum = action.payload.pageSum;
+			newState.total = action.payload.total;
+			break;
+		case article.CHANGE_TYPE:
+			console.log(newState, action);
+			newState.typeId = action.typeId;
 			break;
 		default:
 			break;

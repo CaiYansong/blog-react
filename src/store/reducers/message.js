@@ -8,6 +8,7 @@ export default function (state = initState, action) {
 			newState.messageList = action.messageList;
 			newState.pageIndex = action.pageIndex;
 			newState.pageSum = action.pageSum;
+			newState.total = action.total;
 			break;
 		default:
 			break;

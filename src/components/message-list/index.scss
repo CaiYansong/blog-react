@@ -1,0 +1,31 @@
+.msg-list-wrap {
+	.no-message {
+		text-align: center;
+	}
+
+	.ant-pagination {
+		text-align: right;
+	}
+
+	.msg-list {
+		list-style: none;
+		padding: 0;
+
+		.msg-item {
+			border: 1px solid #999;
+			border-radius: 5px;
+			margin: 8px 0;
+			padding: 4px;
+
+			.msg-other {
+				padding: 0;
+				margin: 0;
+
+				.msg-create-time {
+					font-size: 10px;
+					color: #999999;
+				}
+			}
+		}
+	}
+}

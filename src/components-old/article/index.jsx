@@ -72,8 +72,8 @@ class Article extends React.Component {
 			<ul className="article-list">
 				{this.props.articleList.map(v => {
 					return <li className="article-item" key={v._id} data-id={v._id} onClick={() => { this.props.history.push("/articlePage/" + v._id); }}>
-						<h3 className="title">{v.title}【{v.typeInfo[0].typeName}】</h3>
-						<p className="time">{v.createTime}</p>
+						<h3 className="title">{v.title}</h3>
+						<p className="time">{v.createTime}【{v.typeInfo[0].typeName}】</p>
 						<div style={{ maxHeight: '63px' }} className="content" dangerouslySetInnerHTML={{ __html: this.subArticleContent(v.content) }} />
 					</li>
 				})}

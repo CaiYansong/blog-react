@@ -3,4 +3,6 @@ export default {
 	articleList: [],
 	pageIndex: 1,
 	pageSum: 1,
+	total: 0,
+	typeId: ''
 }

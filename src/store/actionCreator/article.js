@@ -3,13 +3,6 @@ import axios from "axios";
 
 
 export default {
-	checkTypeBack(data) {
-		if (data.ok === 1) {
-			this.getArticleType();
-		} else {
-			alert(data.msg);
-		}
-	},
 	checkListBack(data) {
 		if (data.ok === 1) {
 			this.getArticleList();
@@ -17,43 +10,6 @@ export default {
 			alert(data.msg);
 		}
 	},
-	addArticleType(typeName) {
-		return (dispatch, getState) => {
-			axios.post("/articleType", {
-				typeName
-			}).then(this.checkTypeBack.bind(this));
-		}
-	},
-	getArticleType() {
-		return (dispatch, getState) => {
-			axios.get("/articleType").then(data => {
-				dispatch({
-					type: type.GET_ARTICLE_TYPE,
-					articleTypeList: data.articleTypeList
-				});
-			});
-		};
-	},
-	deleteArticleType(_id) {
-		return (dispatch, getState) => {
-			axios.delete("/articleType", {
-				params: {
-					_id
-				}
-			}).then(this.checkTypeBack.bind(this));
-		};
-	},
-	editArticleType(_id, typeName) {
-		return (dispatch, getState) => {
-			axios.put("/articleType", {
-				params: {
-					_id,
-					typeName
-				}
-			}).then(this.checkTypeBack.bind(this));
-		};
-	},
-	//-----文章-----
 	addArticle(formData) {
 		return (dispatch, getState) => {
 			axios.post("/articleItem", formData).then(this.checkListBack);
@@ -61,6 +17,9 @@ export default {
 	},
 	getArticleList(pageIndex = 1, typeId = "", keyword = "") {
 		return (dispatch, getState) => {
+			if (getState()) {
+				console.log(getState().article);
+			}
 			axios.get("/articleList", {
 				params: {
 					pageIndex,
@@ -74,27 +33,9 @@ export default {
 						payload: {
 							articleList: data.articleList,
 							pageIndex: data.pageIndex,
-							pageSum: data.pageSum
+							pageSum: data.pageSum,
+							total: data.count
 						}
-					});
-			});
-		}
-	},
-	getMyArticleList(pageIndex = 1, typeId = "", keyword = "") {
-		return (dispatch, getState) => {
-			axios.get("/myArticleList", {
-				params: {
-					pageIndex,
-					keyword,
-					typeId
-				}
-			}).then(data => {
-				if (data.ok === 1)
-					dispatch({
-						type: type.GET_ARTICLE,
-						articleList: data.articleList,
-						pageIndex: data.pageIndex,
-						pageSum: data.pageSum
 					});
 			});
 		}

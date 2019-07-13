@@ -72,7 +72,8 @@ module.exports.getList = (req, res) => {
 					ok: 1,
 					articleList: [],
 					pageIndex,
-					pageSum
+					pageSum,
+					count
 				});
 				return 0;
 			}
@@ -80,7 +81,8 @@ module.exports.getList = (req, res) => {
 				common.send(res, err, {
 					articleList,
 					pageIndex,
-					pageSum
+					pageSum,
+					count
 				});
 			});
 		}

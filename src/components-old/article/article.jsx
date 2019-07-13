@@ -58,8 +58,8 @@ class Article extends React.Component {
 	render() {
 		var item = this.state.item;
 		return <div className="articleRead">
-			<h2 className="title">{item.title}【{item.typeInfo ? item.typeInfo[0].typeName : ""}】</h2>
-			<p className="time">{item.createTime}</p>
+			<h2 className="title">{item.title}</h2>
+			<p className="time">{item.createTime}【{item.typeInfo ? item.typeInfo[0].typeName : ""}】</p>
 			<div className="content" dangerouslySetInnerHTML={{ __html: item.content }} />
 			<Popconfirm title="是否确定删除" onConfirm={this.confirm} onCancel={this.cancel} okText="删除" cancelText="取消"  style={this.checkToken()? '' : {display: 'none'}}>
 				<div className="remove" ref="remove">删除</div>
